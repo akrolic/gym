@@ -13,7 +13,7 @@ class PendulumEnv(gym.Env):
     def __init__(self):
         self.max_speed=8
         self.max_torque=2.
-        self.dt=.05
+        self.dt=.005
         self.viewer = None
 
         high = np.array([1., 1., self.max_speed])
