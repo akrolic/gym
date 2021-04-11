@@ -8,13 +8,13 @@ from os import path
 class PendulumEnv(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 200
+        'video.frames_per_second': 1000
     }
 
     def __init__(self, g=10.0):
         self.max_speed = 8
         self.max_torque = 2.
-        self.dt = .005
+        self.dt = .0001
         self.g = g
         self.m = 1.
         self.l = 1.
