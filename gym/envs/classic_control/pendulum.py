@@ -77,7 +77,7 @@ class PendulumEnv(gym.Env):
             self.pole_transform = rendering.Transform()
             rod.add_attr(self.pole_transform)
             self.viewer.add_geom(rod)
-            axle = rendering.make_circle(.05)
+            axle = rendering.make_circle(.0001)
             axle.set_color(0, 0, 0)
             self.viewer.add_geom(axle)
             fname = path.join(path.dirname(__file__), "assets/clockwise.png")
