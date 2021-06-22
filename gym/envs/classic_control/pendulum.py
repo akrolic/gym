@@ -14,8 +14,10 @@ class PendulumEnv(gym.Env):
     def __init__(self, g=10.0):
         self.max_speed = 8
         self.max_torque = 2.
-        self.dt = .0001
+        self.dt = .01
         self.g = g
+        #Added: Friction
+        self.b = 0.1
         self.m = 1.
         self.l = 1.
         self.viewer = None
@@ -42,6 +44,8 @@ class PendulumEnv(gym.Env):
         th, thdot = self.state  # th := theta
 
         g = self.g
+        #Added: Friction
+        b = self.b
         m = self.m
         l = self.l
         dt = self.dt
@@ -49,8 +53,8 @@ class PendulumEnv(gym.Env):
         u = np.clip(u, -self.max_torque, self.max_torque)[0]
         self.last_u = u  # for rendering
         costs = angle_normalize(th) ** 2 + .1 * thdot ** 2 + .001 * (u ** 2)
-
-        newthdot = thdot + (-3 * g / (2 * l) * np.sin(th + np.pi) + 3. / (m * l ** 2) * u) * dt
+        #Added Friction term, but not sure why theres 1/2 in the first term...
+        newthdot = thdot + (-3 * g / (2 * l) * np.sin(th + np.pi) - 3 * b / (m * l **2) + 3. / (m * l ** 2) * u) * dt
         newth = th + newthdot * dt
         newthdot = np.clip(newthdot, -self.max_speed, self.max_speed)
 
