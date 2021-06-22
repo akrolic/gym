@@ -17,7 +17,7 @@ class PendulumEnv(gym.Env):
         self.dt = .01
         self.g = g
         #Added: Friction
-        self.b = 0.5
+        self.b = 1.
         self.m = 1.
         self.l = 1.
         self.viewer = None
