@@ -17,7 +17,7 @@ class PendulumEnv(gym.Env):
         self.dt = .01
         self.g = g
         #Added: Friction
-        self.b = 0.1
+        self.b = 0.5
         self.m = 1.
         self.l = 1.
         self.viewer = None
@@ -54,7 +54,7 @@ class PendulumEnv(gym.Env):
         self.last_u = u  # for rendering
         costs = angle_normalize(th) ** 2 + .1 * thdot ** 2 + .001 * (u ** 2)
         #Added Friction term, but not sure why theres 1/2 in the first term...
-        newthdot = thdot + (-3 * g / (2 * l) * np.sin(th + np.pi) - 3 * b / (m * l **2) + 3. / (m * l ** 2) * u) * dt
+        newthdot = thdot + (-3 * g / (2 * l) * np.sin(th + np.pi) - 3 * b * thdot / (m * l **2) + 3. / (m * l ** 2) * u) * dt
         newth = th + newthdot * dt
         newthdot = np.clip(newthdot, -self.max_speed, self.max_speed)
 
