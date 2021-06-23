@@ -14,7 +14,7 @@ class PendulumEnv(gym.Env):
     def __init__(self, g=10.0):
         self.max_speed = 8
         self.max_torque = 2.
-        self.dt = .01
+        self.dt = .0001
         self.g = g
         #Added: Friction
         self.b = 1.
